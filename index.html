@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>冥想学术论文与案例</title>
+  <style>
+    :root {
+      --primary: #1e90ff;
+      --bg: #f5faff;
+      --text: #0a1a33;
+      --muted: #5a6a85;
+      --card: #ffffff;
+      --border: #cdddf5;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial; background: var(--bg); color: var(--text); }
+    header { background: var(--primary); color:#fff; padding: 14px 20px; display:flex; justify-content:space-between; align-items:center; }
+    header .title { font-weight:700; font-size:18px; }
+    header .home-btn { background:#fff; color:var(--primary); border:none; padding:8px 14px; border-radius:6px; font-weight:600; cursor:pointer; }
+    .section { padding: 20px; max-width:1000px; margin:auto; }
+    .section h2 { font-size:22px; margin-bottom:12px; }
+    .overview { background: var(--card); border:1px solid var(--border); border-radius:10px; padding:16px; line-height:1.6; }
+    .list { display:flex; flex-direction:column; gap:16px; margin-top:16px; }
+    .item { background: var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; display:flex; gap:12px; align-items:flex-start; }
+    .item img { width:60px; height:60px; object-fit:cover; border-radius:8px; flex-shrink:0; background: var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:bold; text-align:center; }
+    .item-content { flex:1; }
+    .item h3 { margin:0 0 8px; font-size:18px; color:var(--primary); }
+    .item p { margin:4px 0; font-size:14px; color:var(--muted); }
+    .btn { display:inline-block; margin-top:10px; background: var(--primary); color:#fff; padding:6px 12px; border-radius:6px; font-size:14px; text-decoration:none; font-weight:600; }
+    @media (max-width:768px) {
+      header { flex-direction:column; gap:8px; align-items:flex-start; }
+      .section { padding:16px; }
+      .item h3 { font-size:16px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 第一模块 标题与导航 -->
+  <header>
+    <div class="title">冥想学术论文与案例</div>
+    <button class="home-btn" onclick="location.href='index.html'">首页</button>
+  </header>
+
+  <!-- 第二模块 研究概述 -->
+  <section class="section">
+    <h2>名人名企业案例</h2>
+    <div class="overview">
+      本页面汇集了来自全球以及中国的名人和知名企业在冥想方面的公开报道。名人案例展示了冥想在压力管理、创造力和幸福感方面的积极作用；企业案例则揭示了冥想在生产力、员工健康和组织文化中的价值。所有条目均包含报道摘要、来源信息和跳转原始报道的链接，便于进一步查阅和引用。
+    </div>
+  </section>
+
+  <!-- 第三模块 研究方法与数据来源 -->
+  <section class="section">
+    <h2>研究方法与数据来源</h2>
+    <div class="overview">
+      本页面所展示的案例信息来源于多个公开报道与可信新闻媒体，包括 <strong>Oprah.com</strong>、<strong>Rolling Stone</strong>、<strong>新浪新闻</strong>、<strong>华尔街日报</strong>、<strong>人民网</strong>、<strong>新华网</strong> 等。研究方法包括：
+      <ul>
+        <li>整理公开报道与企业公开信息</li>
+        <li>提取报道摘要、来源及关键数据指标</li>
+        <li>根据报道内容进行对比与分析，突出冥想在个人与企业层面的影响</li>
+      </ul>
+      所有数据均来自公开渠道，使用时请结合原始报道进行验证和引用。
+    </div>
+  </section>
+
+  <!-- 第四模块 案例列表 -->
+  <section class="section">
+    <h2>名人案例</h2>
+    <div class="list" id="celeb-list"></div>
+  </section>
+
+  <section class="section">
+    <h2>名企业案例</h2>
+    <div class="list" id="ent-list"></div>
+  </section>
+
+  <script>
+    const defaultImg = 'data:image/svg+xml;utf8,' + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+        <rect width="60" height="60" rx="8" fill="%231e90ff"/>
+        <text x="50%" y="50%" font-size="10" font-family="Arial, sans-serif" fill="white" text-anchor="middle" alignment-baseline="central">冥想案例</text>
+      </svg>
+    `);
+
+    const CELEBS = [
+      {name:"Oprah Winfrey", summary:"Oprah 推广在公司内的每日冥想，称有助于专注与情绪平衡。", source:"Oprah.com / Glamour", url:"https://www.oprah.com/spirit/what-oprah-knows-about-the-power-of-meditation?utm_source=chatgpt.com", img:"https://upload.wikimedia.org/wikipedia/commons/8/8f/Oprah_in_2014.jpg"},
+      {name:"李连杰 Jet Li", summary:"李连杰自述长期禅修与打坐，强调个人精神修行的重要性。", source:"新浪新闻", url:"https://ent.sina.com.cn/m/m/2015-08-30/doc-ifxhkafe6029710.shtml", img:"https://upload.wikimedia.org/wikipedia/commons/2/23/Jet_Li_2009.jpg"},
+      {name:"马云 Jack Ma", summary:"马云在公开演讲中提到练习太极与冥想有助于管理压力和企业决策。", source:"人民网", url:"http://finance.people.com.cn/n1/2017/1015/c1004-29587091.html", img:"https://upload.wikimedia.org/wikipedia/commons/5/59/Jack_Ma_2018.jpg"},
+      {name:"杨澜 Yang Lan", summary:"杨澜在访谈中谈到通过冥想缓解紧张，提高专注力。", source:"新华网", url:"http://www.xinhuanet.com/ent/2019-05/20/c_1124511375.htm", img:"https://upload.wikimedia.org/wikipedia/commons/8/86/Yang_Lan_WEF.jpg"},
+      {name:"Hugh Jackman", summary:"杰克曼多次公开表示练习 TM，并称“改变了生活”。", source:"Oprah", url:"https://www.oprah.com/inspiration/how-meditation-changed-hugh-jackmans-life?utm_source=chatgpt.com", img:"https://upload.wikimedia.org/wikipedia/commons/7/7e/Hugh_Jackman_2019.jpg"},
+      {name:"Russell Brand", summary:"布兰德长期每日冥想，用于情绪稳定与戒瘾康复支持。", source:"Meditation Lifestyle", url:"https://www.meditationlifestyle.com/russell-brand-meditation?utm_source=chatgpt.com", img:"https://upload.wikimedia.org/wikipedia/commons/9/9b/Russell_Brand_2013.jpg"},
+      {name:"Madonna", summary:"麦当娜多次谈到冥想与静默练习带来的灵感与平静。", source:"MeditationWise", url:"https://www.meditationwise.com/madonna-meditation?utm_source=chatgpt.com", img:"https://upload.wikimedia.org/wikipedia/commons/0/0a/Madonna_RTL_2015.jpg"},
+      {name:"Katy Perry", summary:"佩里在采访中称 TM 帮助应对压力、保持高效。", source:"TM Organization", url:"https://www.tm.org/katy-perry-meditation?utm_source=chatgpt.com", img:"https://upload.wikimedia.org/wikipedia/commons/6/62/Katy_Perry_2019.jpg"},
+      {name:"David Lynch", summary:"林奇长期推广 TM，并通过基金会将冥想引入学校与退伍军人项目。", source:"Rolling Stone / DLF", url:"https://www.rollingstone.com/culture/culture-news/david-lynch-foundation-meditation-646269/?utm_source=chatgpt.com", img:"https://upload.wikimedia.org/wikipedia/commons/d/d8/David_Lynch_Cannes_2017.jpg"},
+    ];
+
+    const ENTERPRISES = [
+      {name:"Aetna", summary:"引入冥想/瑜伽干预后，内部称压力下降、生产力提升与医疗成本降低。", source:"SIGMA / PBS / FierceHealthcare", url:"https://www.sigmaassessmentsystems.com/mindfulness-roi/?utm_source=chatgpt.com", img:"https://upload.wikimedia.org/wikipedia/commons/3/3b/Aetna_logo.svg"},
+      {name:"Google (SIY)", summary:"正念+情绪智力培训；报告显示专注、情绪管理等指标改善。", source:"Google Blog / SIY Global", url:"https://siyglobal.com/", img:"https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"},
+      {name:"Intel", summary:"9周课程与内部教练模式，目标覆盖全球员工。", source:"The Guardian / Mindful.org", url:"https://www.theguardian.com/sustainable-business/price-intel-mindfulness-program-employee?utm_source=chatgpt.com", img:"https://upload.wikimedia.org/wikipedia/commons/c/c9/Intel-logo.svg"},
+      {name:"SAP", summary:"官方将正念融入领导力；行业报告称 ROI ~200%。", source:"SIGMA / SAP 官方", url:"https://www.sigmaassessmentsystems.com/wp-content/uploads/2019/05/SIGMA_The-ROI-of-Mindfulness.pdf?utm_source=chatgpt.com", img:"https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg"},
+      {name:"General Mills", summary:"为员工提供冥想室与课程，提升创造力与专注。", source:"Inc. / HBR", url:"https://www.inc.com/guides/2010/08/general-mills-mindfulness-program.html?utm_source=chatgpt.com", img:"https://upload.wikimedia.org/wikipedia/commons/1/1a/General_Mills_logo.svg"},
+      {name:"Target", summary:"零售业采纳正念以改善员工体验与顾客服务。", source:"HBR", url:"https://hbr.org/2015/01/mindfulness-in-the-age-of-complexity", img:"https://upload.wikimedia.org/wikipedia/commons/9/9a/Target_logo.svg"},
+      {name:"Goldman Sachs", summary:"部分团队引入冥想资源，参与规模有限。", source:"华尔街日报", url:"https://www.wsj.com/", img:"https://upload.wikimedia.org/wikipedia/commons/2/2e/Goldman_Sachs.svg"},
+      {name:"华为 Huawei", summary:"华为内部推行正念冥想训练营，用于缓解工程师工作压力。", source:"21世纪经济报道", url:"http://www.21jingji.com/article/20200810/herald/1f3d1c8ddf7a.html", img:"https://upload.wikimedia.org/wikipedia/commons/6/67/Huawei_Standard_logo.svg"},
+      {name:"字节跳动 ByteDance", summary:"公司福利中引入冥想与心理课程，帮助员工提升专注力与幸福感。", source:"新京报", url:"http://www.bjnews.com.cn/detail/2021/05/12/162083912814706.html", img:"https://upload.wikimedia.org/wikipedia/commons/3/39/ByteDance_logo.svg"},
+    ];
+
+    function renderList(target, data) {
+      target.innerHTML = data.map(c => `
+        <div class="item">
+          <img src="${c.img}" alt="${c.name}" onerror="this.onerror=null;this.src='${defaultImg}';">
+          <div class="item-content">
+            <h3>${c.name}</h3>
+            <p>${c.summary}</p>
+            <p>来源：${c.source}</p>
+            <a class="btn" href="${c.url}" target="_blank">查看报道</a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    renderList(document.getElementById('celeb-list'), CELEBS);
+    renderList(document.getElementById('ent-list'), ENTERPRISES);
+  </script>
+</body>
+</html>
